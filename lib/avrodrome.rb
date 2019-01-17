@@ -6,10 +6,15 @@ require "avrodrome/version"
 require "avrodrome/schema"
 require "avrodrome/subject"
 require "avrodrome/registry"
+require "avrodrome/adaptor"
 
 
 module Avrodrome
   module_function
+
+  def version
+    Avrodrome::VERSION
+  end
 
   def config
     @config ||= OpenStruct.new.tap do |c|

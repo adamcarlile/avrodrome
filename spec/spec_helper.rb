@@ -1,4 +1,7 @@
 require "bundler/setup"
+
+require 'faker'
+require 'pry'
 require "avrodrome"
 
 RSpec.configure do |config|

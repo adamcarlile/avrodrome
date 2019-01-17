@@ -22,11 +22,15 @@ module Avrodrome
       end
     end
 
+    def check(schema)
+      schemas.detect {|x| x.body == schema }
+    end
+
     def schemas
       @schemas ||= []
     end
 
-    def register!(schema:, id: Avrodrome::Registry.next_id, version: next_version)
+    def register!(schema:, id:, version: next_version)
       Avrodrome::Schema.new(body: schema, id: id, version: version, name: name).tap { |x| schemas << x }
     end
 
