@@ -12,6 +12,10 @@ require "avrodrome/adaptor"
 module Avrodrome
   module_function
 
+  def build_adaptor
+    Avrodrom::Adaptor.new
+  end
+
   def version
     Avrodrome::VERSION
   end

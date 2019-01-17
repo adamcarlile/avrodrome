@@ -1,8 +1,6 @@
 # Avrodrome
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/avrodrome`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Avrodrome, just like an aerodrome is a place to store aircraft, avrodrome is a place to store Avro schemas. Designed to be use as an in memory drop in replacement for `AvroTurf/Avromatic` registry, instead of using `Webmock` and stubbing calls for testing. It can also be used in development, as it will behave exactly like talking to an Avro schema registry
 
 ## Installation
 
@@ -14,25 +12,44 @@ gem 'avrodrome'
 
 And then execute:
 
-    $ bundle
+	$ bundle
 
 Or install it yourself as:
 
-    $ gem install avrodrome
+	$ gem install avrodrome
+
+## Configuration
+
+```ruby
+Avrodrome.configure do |config|
+	config.logger = Logger.new(STDOUT) #Default
+end
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+Designed to be used as a replacement for the registry class in `AvroTurf/Avromatic`
 
-## Development
+```ruby
+require 'avrodrome'
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Avromatic.configure do |config|
+	config.schema_store = Avro::Builder::SchemaStore.new(path: 'path/to/store')
+	config.schema_registry = Avrodrome.build_adaptor
+	config.build_messaging!
+end
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+or
+
+```ruby
+avro = AvroTurf::Messaging.new(registry: Avrodrome.build_adaptor)
+avro.encode({...})
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/avrodrome.
+Bug reports and pull requests are welcome on GitHub at https://github.com/adamcarlile/avrodrome.
 
 ## License
 
