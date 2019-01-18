@@ -13,7 +13,7 @@ module Avrodrome
   module_function
 
   def build_adaptor
-    Avrodrom::Adaptor.new
+    Avrodrome::Adaptor.new
   end
 
   def version
