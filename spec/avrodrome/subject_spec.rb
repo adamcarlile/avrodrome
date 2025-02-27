@@ -6,8 +6,8 @@ RSpec.describe Avrodrome::Subject do
   let(:avro_subject) { Avrodrome::Subject.new(name: name) }
 
   context "registering a schema" do
-    let(:id)      { Faker::Number.between(1,100) }
-    let(:version) { Faker::Number.between(1,100) }
+    let(:id)      { Faker::Number.between(from: 1, to: 100) }
+    let(:version) { Faker::Number.between(from: 1, to: 100) }
 
     before do 
       avro_subject.register!(schema: schema, id: id, version: version)

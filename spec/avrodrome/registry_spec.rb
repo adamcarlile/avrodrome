@@ -45,12 +45,13 @@ RSpec.describe Avrodrome::Adaptor do
   context "#subject_version" do
     let(:name)  { "event_name"}
     let(:count) { 2 }
+    let(:version) { 1 }
     before { count.times { subject.register(name, schema) } }
 
-    it { expect(subject.subject_version(name, count).version).to eql(count)}
+    it { expect(subject.subject_version(name, version).version).to eql(version)}
   
     context "#subject_version('latest')" do
-      it { expect(subject.subject_version(name, 'latest').version).to eql(count)}
+      it { expect(subject.subject_version(name, 'latest').version).to eql(version)}
     end
 
     context "missing version" do

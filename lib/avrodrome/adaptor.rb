@@ -13,6 +13,9 @@ module Avrodrome
     end
 
     def register(subject, schema)
+      id = registry.subject(subject)&.check(schema)&.id
+      return id if id
+
       registered_schema = registry.register!(subject, schema)
       logger.info "Registered schema for subject `#{subject}`; id = #{registered_schema.id}"
       registered_schema.id

@@ -1,7 +1,7 @@
 RSpec.describe Avrodrome::Schema do
   let(:name) { Faker::Science.element.downcase.gsub(" ", "_") }
-  let(:version) { Faker::Number.between(1, 100) }
-  let(:id)   { Faker::Number.between(1, 100) }
+  let(:version) { Faker::Number.between(from: 1, to: 100) }
+  let(:id)   { Faker::Number.between(from: 1, to: 100) }
   let(:fields) { [{ name: 'state', type: [nil, "string"], default: nil }] }
   let(:body) { { type: "record", name: name, fields: fields }.to_json }
   let(:arguments) do 
@@ -12,7 +12,7 @@ RSpec.describe Avrodrome::Schema do
       name: name 
     } 
   end
-  let(:schema) { Avrodrome::Schema.new(arguments) }
+  let(:schema) { Avrodrome::Schema.new(**arguments) }
 
   context "to_hash" do
     subject { schema.to_hash }
